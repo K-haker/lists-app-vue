@@ -11,13 +11,15 @@
       <EnterForm @addNCListNowLS="addToDo"/>
       <div class="tasks-block">
         <div v-if="this.NCListNowLS.toDoList  && this.NCListNowLS.toDoList.length > 0" class="tasks-counter">Кол-во задач: <span class="span-fw-700"> {{ this.NCListNowLS.toDoList? this.NCListNowLS.toDoList.length : "0" }} </span></div>
-        <button v-if="this.NCListNowLS.toDoList  && this.NCListNowLS.toDoList.length > 0" @click="clearList" class="tasks-clear">Очистить</button>
+<!--         <button v-if="this.NCListNowLS.toDoList  && this.NCListNowLS.toDoList.length > 0" @click="clearToDoList" class="tasks-clear">Очистить</button> -->
       </div>
       <DoList  @deleteDoItem = "deleteDoItem"  @onItemCompleted="onItemCompleted" class="do-item"  v-bind:toDoList="toDoList" :NCListNowLS="NCListNowLS"/>
-      <button @click="deleteOneToDo" class="delete-one-todo" title="Удалить этот список дел">Удалить</button>   
+      <router-link to="/nclists">
+        <button @click="deleteOneToDo" class="delete-one-todo" title="Удалить этот список дел">Удалить</button> 
+      </router-link>  
     </div>
 
-<!--     <modal-rename-list   @renameList = "renameList" @newNameList ="newNameList" @closeModalRenameList="closeModalRenameList" v-model:show="renameModalVisible" v-model="newListName"></modal-rename-list> -->
+    <modal-rename-list   @renameList = "renameList" @newNameList ="newNameList" @closeModalRenameList="closeModalRenameList" v-model:show="renameModalVisible" v-model="newListName"></modal-rename-list>
   </div>
 </template>
 
@@ -26,7 +28,7 @@
   import EnterForm from '@/components/EnterForm.vue'
   import DoList from '@/components/DoList.vue'
 
-/*   import ModalRenameList from '@/components/ModalRenameList.vue' */
+  import ModalRenameList from '@/components/ModalRenameList.vue'
 
 
   export default{
@@ -34,15 +36,13 @@
     components: {
       EnterForm,
       DoList,
-
-/*       ModalRenameList, */
-
+      ModalRenameList,
     },
 
     props:{
-      NCListNow:{
+/*       NCListNow:{
         type: Object,
-      },
+      }, */
     },
 
     data:() =>({
@@ -59,18 +59,63 @@
 
       newListName:"",
       renameModalVisible: false,
-      listId:""
-
     }),
 
     methods:{
+      /*Очистить список дел */
+
+      /* clearToDoList(){
+        this.NCListNowLS.toDoList.splice(0, this.NCListNowLS.toDoList.length)
+        localStorage.setItem('NCListNowLS', JSON.stringify(this.NCListNowLS))
+
+        this.notCalendarList.map((item)=>{
+          if(item.id == this.NCListNowLS.id){
+            item.toDoList.splice(0, item.length)  
+            localStorage.setItem('notCalendarList', JSON.stringify(this.notCalendarList))
+          }
+        })
+      }, */
+
+      /* Удалить список дел */
+      deleteOneToDo(){
+        this.notCalendarList = this.notCalendarList.filter(a => a.id != this.NCListNowLS.id)
+        localStorage.setItem('notCalendarList', JSON.stringify(this.notCalendarList))  
+      },
+
+      /*Работа с модальным окном переименования списка дел */
+      renameList(){
+        this.renameModalVisible = true
+      },
+
+      newNameList( newListName, newNameOfList){
+/*       let listId = this.NCListNowLS  */
+      let newNameList = newNameOfList
+
+      let NCListNowLS = this.NCListNowLS 
+
+      let locStorNCList = this.notCalendarList
+      this.notCalendarList.map(function(item){
+
+        if(item.id == NCListNowLS.id){
+          item.name = newNameList
+          NCListNowLS.name = newNameList
+          localStorage.setItem('notCalendarList', JSON.stringify(locStorNCList))
+        }
+      })
+
+      this.renameModalVisible = false
+    },
+
+    closeModalRenameList(){
+      this.renameModalVisible = false
+    },
 
       /* */
       addToDo(NCListNowLS){
         this.NCListNowLS = NCListNowLS
       },
 
-      deleteDoItem(toDo){
+/*       deleteDoItem(toDo){
         this.taskNow = toDo
         this.notCalendarList.map((item)=>{
           if(item.id == this.NCListNowLS.id){
@@ -82,6 +127,20 @@
             console.log(localStorage.NCListNowLS)
           }
         }) 
+      }, */
+
+      deleteDoItem(toDo){
+        this.NCListNowLS.toDoList = this.NCListNowLS.toDoList.filter(p=> p.id !== toDo.id)
+        localStorage.setItem('NCListNowLS', JSON.stringify(this.NCListNowLS))
+
+        this.notCalendarList.map((item)=>{
+          if(item.id == this.NCListNowLS.id){
+            item.toDoList = this.NCListNowLS.toDoList   
+            localStorage.setItem('notCalendarList', JSON.stringify(this.notCalendarList))
+/*             this.NCListNowLS = item
+            localStorage.setItem('NCListNowLS', JSON.stringify(this.NCListNowLS)) */
+          }
+        })
       },
 
       /*Исходный код */
@@ -103,11 +162,6 @@
         } else {
           toDo.completed= true
         }
-      },
-
-      clearList(){
-        this.toDoList.splice(0, this.toDoList.length)
-        localStorage.setItem('toDoList', JSON.stringify(this.toDoList))
       },
 
     },

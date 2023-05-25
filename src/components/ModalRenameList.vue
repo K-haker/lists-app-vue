@@ -28,7 +28,7 @@
   
     data(){
       return{
-        newNameOfList:"Новое название"
+        newNameOfList:""
       }
     },
   

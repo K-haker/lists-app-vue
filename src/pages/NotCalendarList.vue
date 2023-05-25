@@ -145,6 +145,11 @@ export default{
     if (data){
       this.notCalendarList = JSON.parse(data)
     }
+
+    const NCListNowLS =  localStorage.getItem('NCListNowLS')
+    if (NCListNowLS){
+      this.NCListNowLS = JSON.parse(NCListNowLS)
+    }
   }
 
 }
