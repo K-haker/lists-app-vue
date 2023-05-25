@@ -1,7 +1,7 @@
 <template>
   <div :class="{ checked: toDo.completed === true }" class="list-item">
     <div class="list-item__left">
-      <input @click="$emit('itemCompleted', toDo)" type="checkbox">
+<!--       <input @click="$emit('itemCompleted', toDo)" type="checkbox"> -->
       <div  class="list-item__todo">{{ toDo.dataBody }}</div>
     </div>
     <button  @click="$emit('deleteDoItem', toDo)" class="list-item__delete">X</button>

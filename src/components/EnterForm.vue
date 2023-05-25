@@ -20,6 +20,26 @@ export default {
 
     methods:{
 
+/*       addToDo(){ 
+        let idNcListItem = Date.now()
+        this.toDo = {
+          id: idNcListItem,
+          completed: false,
+          dataBody:this.dataNewTodoItem,
+        }
+        
+        this.notCalendarList.map((item, )=>{
+          if(item.id == this.NCListNowLS.id){   
+            this.dataNewTodoItem = ""
+            item.toDoList.push(this.toDo)
+            localStorage.setItem('notCalendarList', JSON.stringify(this.notCalendarList))
+            this.NCListNowLS = item
+            localStorage.setItem('NCListNowLS', JSON.stringify(this.NCListNowLS))
+            this.$emit('addNCListNowLS', this.NCListNowLS)
+          }
+        })
+      }, */
+
       addToDo(){ 
         let idNcListItem = Date.now()
         this.toDo = {
@@ -36,18 +56,40 @@ export default {
             this.NCListNowLS = item
             localStorage.setItem('NCListNowLS', JSON.stringify(this.NCListNowLS))
             this.$emit('addNCListNowLS', this.NCListNowLS)
-
-            console.log(this.NCListNowLS)
-            console.log(localStorage.NCListNowLS)
           }
         })
       },
+
+      /* addToDo(){ 
+        let idNcListItem = Date.now()
+        this.toDo = {
+          id: idNcListItem,
+          completed: false,
+          dataBody:this.dataNewTodoItem,
+        }
+        
+        this.notCalendarList.map((item, )=>{
+          if(item.id == this.NCListNowLS.id){   
+            this.dataNewTodoItem = ""
+            item.toDoList.push(this.toDo)
+            localStorage.setItem('notCalendarList', JSON.stringify(this.notCalendarList))
+            this.NCListNowLS = item
+            localStorage.setItem('NCListNowLS', JSON.stringify(this.NCListNowLS))
+            this.$emit('addNCListNowLS', this.NCListNowLS)
+          }
+        })
+      }, */
     },
 
     async mounted(){
       const NCListNowLS =  localStorage.getItem('NCListNowLS')
       if (NCListNowLS){
         this.NCListNowLS = JSON.parse(NCListNowLS)
+      }
+
+      const data =  localStorage.getItem('notCalendarList')
+      if (data){
+        this.notCalendarList = JSON.parse(data)
       }
 
       const notCalendarList =  localStorage.getItem('notCalendarList')
