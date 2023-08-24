@@ -1,19 +1,22 @@
 <template>
-  <div class="lists" >
-    <h1>Недатированные списки</h1>
-    <div>
-      <input class="lists-search" type="text" placeholder="Поиск по названию" v-model="searchNClist">
+  <div class="not-calendar-lists-wrapper">
+    <div class="not-calendar-lists" >
+      <h1>Недатированные списки</h1>
+      <router-link to="/">
+        <div class="close">X</div>
+      </router-link>
+      <div>
+        <input class="lists-search" type="text" placeholder="Поиск по названию" v-model="searchNClist">
+      </div>
+      <add-new-c-list @createNewCList="createCList" ></add-new-c-list>
+      <button v-show="notCalendarList.length > 0"  class="clear-nclist"    @click ="modalClearNCList">Очистить </button>
+      <lists-item @changeDataNCTodo="changeDataNCTodo"  @renameList = "renameList"  @deleteCList = "deleteCList"  v-model:notCalendarList="notCalendarList" v-model:searchNCListsFunc="searchNCListsFunc" @onItemsNCListCompleted="onItemsNCListCompleted"></lists-item>
+      <div v-if="notCalendarList.length == 0">Список дел сейчас пуст</div>
     </div>
-    <add-new-c-list @createNewCList="createCList" ></add-new-c-list>
-    <button v-show="notCalendarList.length > 0"  class="clear-nclist"    @click ="modalClearNCList">Очистить </button>
-    <lists-item @changeDataNCTodo="changeDataNCTodo"  @renameList = "renameList"  @deleteCList = "deleteCList"  v-model:notCalendarList="notCalendarList" v-model:searchNCListsFunc="searchNCListsFunc" @onItemsNCListCompleted="onItemsNCListCompleted"></lists-item>
-    <div v-if="notCalendarList.length == 0">Список дел сейчас пуст</div>
     <modal-rename-list   @renameList = "renameList" @newNameList ="newNameList" @closeModalRenameList="closeModalRenameList" v-model:show="renameModalVisible" v-model="newListName"></modal-rename-list>
     <modal-delete-not-calend-list @deleteCListYes = "deleteCListYes" @closeModalDeleteNCList="closeModalDeleteNCList" v-model:show="dialogVisible"></modal-delete-not-calend-list>
     <modal-delete-all-lists v-model:show="dialogDeleteAll" @closeModalDeleteAllLists="closeModalDeleteAllLists" @clearNCList="clearNCList"></modal-delete-all-lists>
   </div>
-
-  <router-link to="/">Переход на главную</router-link>
 </template>
 
 <script>
@@ -156,18 +159,19 @@ export default{
 
 </script>
 
-<style>
-  .lists{
+<style scoped>
+  .not-calendar-lists{
     background-color: #ffffff;
     padding: 50px;
     border-radius: 30px;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 30px auto;
+    height: calc(100vh - 60px)
   }
 
-  .lists__main{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
+
 
   .lists-search{
     margin-bottom: 30px;
@@ -177,16 +181,15 @@ export default{
     margin-bottom: 30px;
   }
 
-  .lists-add button{
-    font-size: 28px;
-    background-color: rgba(0, 255, 0, 0.568);
-    border: none;
-    width: 50px;
-    border-radius: 15px;
-    cursor: pointer;
-  }
-
   .clear-nclist{
     margin-bottom: 20px;
+  }
+
+  .not-calendar-lists .close{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 20px;
+    cursor: pointer;
   }
 </style>

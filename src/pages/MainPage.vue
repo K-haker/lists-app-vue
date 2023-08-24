@@ -1,6 +1,6 @@
 <template>
   <div class="main-page">
-<!--     <router-link to="/clist">
+<!--     <router-link to="/clists">
       <div class="main-page__calendar">
         <img src="" alt="">
         <div class="main-page__block-name">Датированный список (с календарем)</div>
@@ -14,12 +14,12 @@
       </div>
     </router-link>
 
-<!--     <router-link to="">
-      <div class="">
+    <router-link to="/notes">
+      <div class="main-page__notes">
         <img src="" alt="">
         <div class="main-page__block-name"> Заметки </div>
       </div>
-    </router-link> -->
+    </router-link>
   </div>
 </template>
 
@@ -47,7 +47,8 @@ export default {
   }
 
   .main-page__not-calendar,
-  .main-page__calendar{
+  .main-page__calendar,
+  .main-page__notes{
     width:250px;
     height: 270px;
     background-color: rgba(255, 255, 255, 0.632);

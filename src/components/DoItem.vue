@@ -1,7 +1,7 @@
 <template>
-  <div :class="{ checked: toDo.completed === true }" class="list-item">
-    <div class="list-item__left">
-<!--       <input @click="$emit('itemCompleted', toDo)" type="checkbox"> -->
+  <div :class="{ checked: toDo.completed === true }" class="list-item" >
+    <div class="list-item__left"  @click="$emit('chooseTask', toDo)">
+      <input @click="$emit('itemCompleted', toDo)" type="checkbox">
       <div  class="list-item__todo">{{ toDo.dataBody }}</div>
     </div>
     <button  @click="$emit('deleteDoItem', toDo)" class="list-item__delete">X</button>
@@ -15,7 +15,6 @@ export default {
         type: Object,
         required:true,
       },
-
     },
 }
 </script>
@@ -59,6 +58,7 @@ export default {
     position: relative;
     padding-left: 20px;
     padding-right: 30px;
+    cursor: pointer;
   }
   .list-item__left input{
     position: absolute;

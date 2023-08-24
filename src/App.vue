@@ -205,4 +205,8 @@ h1{
   display: block;
 }
 
+.main-block{
+  width:100%;
+}
+
 </style>
