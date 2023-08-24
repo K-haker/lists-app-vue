@@ -1,16 +1,18 @@
 <template>
-  <div class="lists__main">
-    <div :class="{ completed: listsItem.completed === true }"  class="lists-item" v-for="(listsItem, index) in searchNCListsFunc" :key="index">
-      <router-link @click="$emit('changeDataNCTodo', listsItem)" class="lists-item__img-wrap" to="/todo">
-        <div @click.prevent="$emit('renameList', listsItem)" class="lists-item__rename">
-          <img src="@/images/pen-1.svg" alt="">
-        </div>
-      </router-link>
-      <div class="lists-item__name">{{listsItem.name}}</div>
-      <button @click="$emit('deleteCList', listsItem)" class="lists-item__delete">Х</button>
-      <input @click="$emit('onItemsNCListCompleted', listsItem)" class="lists-item__completed" type="checkbox" :checked="listsItem.completed === true">
+
+    <div class="lists__main">
+      <div :class="{ completed: listsItem.completed === true }"  class="lists-item" v-for="(listsItem, index) in searchNCListsFunc" :key="index">
+        <router-link @click="$emit('changeDataNCTodo', listsItem)" class="lists-item__img-wrap" to="/todo">
+          <div @click.prevent="$emit('renameList', listsItem)" class="lists-item__rename">
+            <img src="@/images/pen-1.svg" alt="">
+          </div>
+        </router-link>
+        <div class="lists-item__name">{{listsItem.name}}</div>
+        <button @click="$emit('deleteCList', listsItem)" class="lists-item__delete">Х</button>
+        <input @click="$emit('onItemsNCListCompleted', listsItem)" class="lists-item__completed" type="checkbox" :checked="listsItem.completed === true">
+      </div>
     </div>
-  </div>
+
 </template>
 
 <script >
@@ -42,13 +44,25 @@
   }
 </script>
 
-<style>
+<style >  
+
+
+  .lists__main{
+    width:calc(100% + 20px);
+    margin-left: -10px;
+    overflow-y: auto;
+    height: 380px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .lists-item{
     width: 200px;
     height: 200px;
     border: 1px solid black;
     position: relative;
-    cursor: pointer
+    cursor: pointer;
+    margin: 0 10px 20px;
   }
 
   .lists-item__completed{

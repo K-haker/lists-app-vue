@@ -1,6 +1,10 @@
 import MainPage from "@/pages/MainPage";
 import NotCalendarList from "@/pages/NotCalendarList";
 import OneToDo from "@/pages/OneToDo"
+import CalendarList from "@/pages/CalendarList";
+import OneMonth from "@/pages/OneMonth";
+import NotesPage from "@/pages/NotesPage";
+import OneNote from "@/pages/OneNote"
 import {createRouter, createWebHistory} from "vue-router";
 
 
@@ -11,6 +15,16 @@ const routes = [
     },
 
     {
+        path: '/clists',
+        component: CalendarList
+    },
+
+    {
+        path: '/onemonth',
+        component: OneMonth
+    },
+
+    {
         path: '/nclists',
         component: NotCalendarList
     },
@@ -18,6 +32,16 @@ const routes = [
     {
         path: '/todo',
         component: OneToDo
+    },
+
+    {
+        path: '/notes',
+        component: NotesPage
+    },
+
+    {
+        path: '/oneNote',
+        component: OneNote
     },
 
 

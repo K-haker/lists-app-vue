@@ -23,6 +23,7 @@ export default {
           id: idNcListItem,
           name: "Новый список",
           completed: false,
+          toDoListDescription:"",
           toDoList:[
 
           ]
@@ -33,27 +34,18 @@ export default {
 
     }
 
-/*   data(){
-    return{
-      listsItem:{
-        name: "Новый список дел",
-        completed: false,
-        toDo:[
-
-        ]
-      }
-    }
-  },
-
-  methods:{
-    createCList(){
-      this.listsItem.id = Date.now() ;
-      this.$emit('createNewCList', this.listsItem);
-    },
-  }  */
-
 }
 </script>
 
 <style>
+
+.lists-add button{
+  font-size: 28px;
+  background-color: rgba(0, 255, 0, 0.568);
+  border: none;
+  width: 50px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
 </style>

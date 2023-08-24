@@ -19,33 +19,13 @@ export default {
     },
 
     methods:{
-
-/*       addToDo(){ 
-        let idNcListItem = Date.now()
-        this.toDo = {
-          id: idNcListItem,
-          completed: false,
-          dataBody:this.dataNewTodoItem,
-        }
-        
-        this.notCalendarList.map((item, )=>{
-          if(item.id == this.NCListNowLS.id){   
-            this.dataNewTodoItem = ""
-            item.toDoList.push(this.toDo)
-            localStorage.setItem('notCalendarList', JSON.stringify(this.notCalendarList))
-            this.NCListNowLS = item
-            localStorage.setItem('NCListNowLS', JSON.stringify(this.NCListNowLS))
-            this.$emit('addNCListNowLS', this.NCListNowLS)
-          }
-        })
-      }, */
-
       addToDo(){ 
         let idNcListItem = Date.now()
         this.toDo = {
           id: idNcListItem,
           completed: false,
           dataBody:this.dataNewTodoItem,
+          taskDescription:"",
         }
         
         this.notCalendarList.map((item, )=>{
@@ -59,26 +39,6 @@ export default {
           }
         })
       },
-
-      /* addToDo(){ 
-        let idNcListItem = Date.now()
-        this.toDo = {
-          id: idNcListItem,
-          completed: false,
-          dataBody:this.dataNewTodoItem,
-        }
-        
-        this.notCalendarList.map((item, )=>{
-          if(item.id == this.NCListNowLS.id){   
-            this.dataNewTodoItem = ""
-            item.toDoList.push(this.toDo)
-            localStorage.setItem('notCalendarList', JSON.stringify(this.notCalendarList))
-            this.NCListNowLS = item
-            localStorage.setItem('NCListNowLS', JSON.stringify(this.NCListNowLS))
-            this.$emit('addNCListNowLS', this.NCListNowLS)
-          }
-        })
-      }, */
     },
 
     async mounted(){
@@ -100,7 +60,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .enter-form{
     margin-bottom: 20px;
     width:100%;
