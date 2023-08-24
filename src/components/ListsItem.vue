@@ -1,6 +1,6 @@
 <template>
 
-    <div class="lists__main">
+    <div v-if="notCalendarList.length >0" class="lists__main">
       <div :class="{ completed: listsItem.completed === true }"  class="lists-item" v-for="(listsItem, index) in searchNCListsFunc" :key="index">
         <router-link @click="$emit('changeDataNCTodo', listsItem)" class="lists-item__img-wrap" to="/todo">
           <div @click.prevent="$emit('renameList', listsItem)" class="lists-item__rename">
